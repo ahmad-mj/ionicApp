@@ -1,0 +1,7 @@
+{
+  "name": "fetCH",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
