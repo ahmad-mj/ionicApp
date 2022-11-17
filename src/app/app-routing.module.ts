@@ -4,21 +4,21 @@ import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {
-
     path: 'auth',
     loadChildren: () =>
-      import('./auth/auth.module').then((m) => m.AuthPageModule)
+    import('./auth/auth.module').then((m) => m.AuthPageModule)
   },
   {
+    canActivate: [AuthGuard],
     path: 'main',
     loadChildren: () =>
-      import('./places/places.module').then((m) => m.PlacesPageModule),
+    import('./places/places.module').then((m) => m.PlacesPageModule),
   },
   {
-
+    canActivate: [AuthGuard],
     path: 'bookings',
     loadChildren: () =>
-      import('./bookings/bookings.module').then((m) => m.BookingsPageModule),
+    import('./bookings/bookings.module').then((m) => m.BookingsPageModule),
   },
 ];
 

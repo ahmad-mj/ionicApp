@@ -13,6 +13,7 @@ export class AuthService {
   }
   public login(): void {
     this.isAuthenticated = true;
+    return;
   }
 
   public logout(): void {
