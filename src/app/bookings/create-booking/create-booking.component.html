@@ -1,11 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <!-- <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons> -->
-    <ion-title> Book Now! </ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="onCancel()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> {{ booked.title }} </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <h2>Book this strain</h2>
+<p>{{ booked.description }}</p>
+<ion-button color="primary" (click)="book()">Book</ion-button>
 </ion-content>
