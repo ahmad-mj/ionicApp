@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SegmentChangeEventDetail } from '@ionic/angular';
 import { Place } from '../place.model';
 import { PlacesService } from '../places.service';
 
@@ -13,5 +14,9 @@ export class FindPage implements OnInit {
 
   ngOnInit() {
     this.loadedPlaces = this.placesService.items;
+  }
+
+  public filter(event: CustomEvent<SegmentChangeEventDetail>) {
+    console.log(event);
   }
 }
