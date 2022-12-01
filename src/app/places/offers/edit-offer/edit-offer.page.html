@@ -4,9 +4,34 @@
       <ion-back-button text="" defaultHref="'/main/tabs/offers/ ' + item.id"></ion-back-button>
     </ion-buttons>
     <ion-title>Edit {{item.title}}</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button routerLink="/main/tabs/offers" (click)="editOffer()" [disabled]="!form.valid">
+        <ion-icon name="checkmark" slot="icon-only"></ion-icon>
+       </ion-button>
+     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <form [formGroup]="form">
+  <ion-grid>
+    <ion-row>
+      <ion-col size-sm="6" offset-sm="3">
+        <ion-item>
+          <ion-label position="floating">Title</ion-label>
+          <ion-input type="text" autocomplete autocorrect formControlName="title"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size-sm="6" offset-sm="3">
+        <ion-item>
+          <ion-label position="floating">Short Description</ion-label>
+          <ion-textarea rows="3" formControlName="description"></ion-textarea>
+        <ion-note  slot="error" *ngIf="!form.get('description').valid && form.get('description').touched">Description can't be less than 1 and longer than 200 characters</ion-note>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</form>
 </ion-content>
