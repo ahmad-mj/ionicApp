@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonItemSliding } from '@ionic/angular';
-import { Place } from '../place.model';
-import { PlacesService } from '../places.service';
+import { Recipe } from '../recipe.model';
+import { RecipesService } from '../recipes.service';
 
 @Component({
   selector: 'app-offers',
@@ -10,11 +10,11 @@ import { PlacesService } from '../places.service';
   styleUrls: ['./offers.page.scss'],
 })
 export class OffersPage implements OnInit {
-  public loadedPlaces: Place[];
-  constructor(private placesService: PlacesService, private router: Router) {}
+  public loadedRecipes: Recipe[];
+  constructor(private placesService: RecipesService, private router: Router) {}
 
   ngOnInit() {
-    this.loadedPlaces = this.placesService.items;
+    this.loadedRecipes = this.placesService.items;
   }
 
   public onEdit(id: string, slidingItem: IonItemSliding) {

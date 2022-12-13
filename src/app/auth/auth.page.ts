@@ -20,9 +20,9 @@ export class AuthPage implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
+      email: ['test@test.aa', Validators.required],
       password: [
-        '',
+        '123455',
         Validators.compose([Validators.minLength(6), Validators.required]),
       ],
     });

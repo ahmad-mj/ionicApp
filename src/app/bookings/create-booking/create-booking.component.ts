@@ -1,7 +1,7 @@
 import { Component, Injectable, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
-import { Place } from 'src/app/places/place.model';
+import { Recipe } from 'src/app/recipes/recipe.model';
 
 const WEEK = 7 * 24 * 60 * 60 * 1000;
 @Component({
@@ -10,7 +10,7 @@ const WEEK = 7 * 24 * 60 * 60 * 1000;
   styleUrls: ['./create-booking.component.scss'],
 })
 export class CreateBookingComponent implements OnInit {
-  @Input() public selectedPlace: Place;
+  @Input() public selectedPlace: Recipe;
   @Input() public selectedMode: 'select' | 'random';
   public startDate;
   public endDate;

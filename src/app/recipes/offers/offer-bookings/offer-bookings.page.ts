@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { Place } from '../../place.model';
-import { PlacesService } from '../../places.service';
+import { Recipe } from '../../recipe.model';
+import { RecipesService } from '../../recipes.service';
 
 @Component({
   selector: 'app-offer-bookings',
@@ -10,11 +10,11 @@ import { PlacesService } from '../../places.service';
   styleUrls: ['./offer-bookings.page.scss'],
 })
 export class OfferBookingsPage implements OnInit {
-  public item: Place;
+  public item: Recipe;
   constructor(
     private route: ActivatedRoute,
     private navController: NavController,
-    private placesService: PlacesService
+    private placesService: RecipesService
   ) {}
 
   ngOnInit() {

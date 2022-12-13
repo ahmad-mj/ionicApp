@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { Place } from '../../place.model';
-import { PlacesService } from '../../places.service';
+import { Recipe } from '../../recipe.model';
+import { RecipesService } from '../../recipes.service';
 
 @Component({
   selector: 'app-edit-offer',
@@ -11,12 +11,12 @@ import { PlacesService } from '../../places.service';
   styleUrls: ['./edit-offer.page.scss'],
 })
 export class EditOfferPage implements OnInit {
-  public item: Place;
+  public item: Recipe;
   public form: FormGroup;
   constructor(
     private route: ActivatedRoute,
     private navController: NavController,
-    private placesService: PlacesService
+    private placesService: RecipesService
   ) {}
 
   ngOnInit() {

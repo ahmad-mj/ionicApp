@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PlacesPage } from './places.page';
+import { RecipesPage } from './recipes.page';
 
 const routes: Routes = [
   {
     path: 'tabs',
-    component: PlacesPage,
+    component: RecipesPage,
     children: [
       {
         path: 'explore',
@@ -19,7 +19,7 @@ const routes: Routes = [
           {
             path: ':id',
             loadChildren: () =>
-              import('./find/place-detail/place-detail.module').then(
+              import('./find/recipe-detail/recipe-detail.module').then(
                 (m) => m.PlaceDetailPageModule
               ),
           },
@@ -74,4 +74,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PlacesPageRoutingModule {}
+export class RecipesPageRoutingModule {}

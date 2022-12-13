@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Place } from './place.model';
+import { Recipe } from './recipe.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PlacesService {
-  private _items: Place[] = [
-    new Place(
+export class RecipesService {
+  private _items: Recipe[] = [
+    new Recipe(
       'p1',
       'Berlin, Kreuzberg Special Experience',
-      'Calm place, where you can rest, hear chill music and smoke with nice folks',
+      'Calm recipe, where you can rest, hear chill music and smoke with nice folks',
       'https://c8.alamy.com/compde/b021f8/coffeeshop-amsterdam-coffee-shop-gemeinsame-haschisch-gras-canabis-marihuana-schmiere-marihuana-drogen-cannabis-b021f8.jpg',
       91,
       new Date('2020,01,01'),
       new Date('2021,12,12')
     ),
-    new Place(
+    new Recipe(
       'p2',
       'Berlin, Mitte fancy Hash Shop',
       'city center',
@@ -24,7 +24,7 @@ export class PlacesService {
       new Date('2020,01,01'),
       new Date('2021,12,12')
     ),
-    new Place(
+    new Recipe(
       'p3',
       'Alexander-Platz Great spot',
       'Stain the day and get high in the highest cannabis spot in Berlin ',

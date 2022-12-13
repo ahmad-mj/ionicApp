@@ -6,22 +6,22 @@ import {
   NavController,
 } from '@ionic/angular';
 import { CreateBookingComponent } from 'src/app/bookings/create-booking/create-booking.component';
-import { Place } from '../../place.model';
-import { PlacesService } from '../../places.service';
+import { Recipe } from '../../recipe.model';
+import { RecipesService } from '../../recipes.service';
 
 @Component({
-  selector: 'app-place-detail',
-  templateUrl: './place-detail.page.html',
-  styleUrls: ['./place-detail.page.scss'],
+  selector: 'app-recipe-detail',
+  templateUrl: './recipe-detail.page.html',
+  styleUrls: ['./recipe-detail.page.scss'],
 })
 export class PlaceDetailPage implements OnInit {
-  public item: Place;
+  public item: Recipe;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private navController: NavController,
-    private placesService: PlacesService,
+    private placesService: RecipesService,
     public modalCtrl: ModalController,
     private actionSheetController: ActionSheetController
   ) {}

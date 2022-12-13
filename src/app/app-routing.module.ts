@@ -9,13 +9,13 @@ const routes: Routes = [
     import('./auth/auth.module').then((m) => m.AuthPageModule)
   },
   {
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     path: 'main',
     loadChildren: () =>
-    import('./places/places.module').then((m) => m.PlacesPageModule),
+    import('./recipes/recipes.module').then((m) => m.RecipesPageModule),
   },
   {
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     path: 'bookings',
     loadChildren: () =>
     import('./bookings/bookings.module').then((m) => m.BookingsPageModule),

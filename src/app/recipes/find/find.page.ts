@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SegmentChangeEventDetail } from '@ionic/angular';
-import { Place } from '../place.model';
-import { PlacesService } from '../places.service';
+import { Recipe } from '../recipe.model';
+import { RecipesService } from '../recipes.service';
 
 @Component({
   selector: 'app-find',
@@ -9,11 +9,11 @@ import { PlacesService } from '../places.service';
   styleUrls: ['./find.page.scss'],
 })
 export class FindPage implements OnInit {
-  public loadedPlaces: Place[];
-  constructor(private placesService: PlacesService) {}
+  public loadedRecipes: Recipe[];
+  constructor(private placesService: RecipesService) {}
 
   ngOnInit() {
-    this.loadedPlaces = this.placesService.items;
+    this.loadedRecipes = this.placesService.items;
   }
 
   public filter(event: CustomEvent<SegmentChangeEventDetail>) {
