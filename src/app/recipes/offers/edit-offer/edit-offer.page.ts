@@ -25,7 +25,7 @@ export class EditOfferPage implements OnInit {
         this.navController.navigateBack('main/tabs/offers');
         return;
       }
-      this.item = this.placesService.loadItems(paramMap.get('id'));
+      this.item = this.placesService.loadItem(paramMap.get('id'));
       this.form = new FormGroup({
         title: new FormControl(this.item.title, {
           updateOn: 'blur',

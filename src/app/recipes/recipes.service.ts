@@ -41,7 +41,7 @@ export class RecipesService {
     return [...this._items];
   }
 
-  loadItems(id: string) {
+  loadItem(id: string) {
     return { ...this._items.find((item) => item.id === id) };
   }
 }
