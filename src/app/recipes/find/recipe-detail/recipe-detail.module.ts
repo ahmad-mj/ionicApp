@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PlaceDetailPageRoutingModule } from './recipe-detail-routing.module';
+import { RecipeDetailPageRoutingModule } from './recipe-detail-routing.module';
 
-import { PlaceDetailPage } from './recipe-detail.page';
+import { RecipeDetailPage } from './recipe-detail.page';
 import { CreateBookingComponent } from 'src/app/bookings/create-booking/create-booking.component';
 
 @NgModule({
@@ -14,8 +14,8 @@ import { CreateBookingComponent } from 'src/app/bookings/create-booking/create-b
     CommonModule,
     ReactiveFormsModule,
     IonicModule,
-    PlaceDetailPageRoutingModule,
+    RecipeDetailPageRoutingModule,
   ],
-  declarations: [PlaceDetailPage, CreateBookingComponent],
+  declarations: [RecipeDetailPage, CreateBookingComponent],
 })
-export class PlaceDetailPageModule {}
+export class RecipeDetailPageModule {}
