@@ -3,10 +3,10 @@
     <ion-buttons slot="start">
       <ion-back-button text="" defaultHref="/main/tabs/offers"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ item.title }}</ion-title>
+    <ion-title>{{ recipe.title }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-<ion-button [routerLink]="['/', 'main', 'tabs', 'offers','edit', item.id]">Edit</ion-button>
+<ion-button [routerLink]="['/', 'main', 'tabs', 'offers','edit', recipe.id]">Edit</ion-button>
 </ion-content>

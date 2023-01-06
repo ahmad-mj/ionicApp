@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonItemSliding } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 import { Recipe } from '../recipe.model';
 import { RecipesService } from '../recipes.service';
 
@@ -9,15 +10,24 @@ import { RecipesService } from '../recipes.service';
   templateUrl: './offers.page.html',
   styleUrls: ['./offers.page.scss'],
 })
-export class OffersPage implements OnInit {
+export class OffersPage implements OnInit, OnDestroy {
   public loadedRecipes: Recipe[];
-  constructor(private placesService: RecipesService, private router: Router) {}
+  public recipesSub: Subscription;
+  constructor(private recipesService: RecipesService, private router: Router) {}
 
-  ngOnInit() {
-    this.loadedRecipes = this.placesService.items;
+  ngOnDestroy(): void {
+    if (this.recipesSub) {
+      this.recipesSub.unsubscribe();
+    }
   }
 
-  public onEdit(id: string, slidingItem: IonItemSliding) {
+  ngOnInit(): void {
+    this.recipesSub = this.recipesService.recipes.subscribe((recipes) => {
+      this.loadedRecipes = recipes;
+    });
+  }
+
+  public onEdit(id: string, slidingItem: IonItemSliding): void {
     slidingItem.close();
     this.router.navigate(['/', 'main', 'tabs', 'offers', 'edit', id]);
     console.log(id);

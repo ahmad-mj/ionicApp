@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
+import { RecipesService } from '../../recipes.service';
 
 @Component({
   selector: 'app-new-offer',
@@ -12,7 +15,11 @@ export class NewOfferPage implements OnInit {
   public dateValue = '2022-11-22T00:00:00+01:00';
   public dateMin: Date = null;
   public dateMax: Date = null;
-  constructor() {
+  constructor(
+    private recipeService: RecipesService,
+    private router: Router,
+    private loadingController: LoadingController
+  ) {
     this.form = new FormGroup({
       title: new FormControl(null, {
         updateOn: 'blur',
@@ -28,11 +35,11 @@ export class NewOfferPage implements OnInit {
       }),
       dateFrom: new FormControl(null, {
         updateOn: 'blur',
-        validators: [Validators.required],
+        // validators: [Validators.required],
       }),
       dateTo: new FormControl(null, {
         updateOn: 'blur',
-        validators: [Validators.required],
+        // validators: [Validators.required],
       }),
     });
   }
@@ -42,7 +49,26 @@ export class NewOfferPage implements OnInit {
     if (!this.form.valid) {
       return;
     }
-    console.log('Add logic to add a new-offer');
+    this.loadingController
+      .create({
+        message: 'Recipe is cooking..',
+      })
+      .then((loadingEl) => {
+        loadingEl.present();
+        this.recipeService
+          .addItem(
+            this.form.value.title,
+            this.form.value.description,
+            +this.form.value.price,
+            this.form.value.dateFrom,
+            this.form.value.dateTo
+          )
+          .subscribe(() => {
+            loadingEl.dismiss();
+            this.form.reset();
+            this.router.navigate(['/main/tabs/offers']);
+          });
+      });
   }
   public showDatePicker() {
     this.datePicker = !this.datePicker;

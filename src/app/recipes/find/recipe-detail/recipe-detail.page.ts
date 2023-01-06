@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   ActionSheetController,
   ModalController,
   NavController,
 } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 import { CreateBookingComponent } from 'src/app/bookings/create-booking/create-booking.component';
 import { Recipe } from '../../recipe.model';
 import { RecipesService } from '../../recipes.service';
@@ -14,17 +15,22 @@ import { RecipesService } from '../../recipes.service';
   templateUrl: './recipe-detail.page.html',
   styleUrls: ['./recipe-detail.page.scss'],
 })
-export class PlaceDetailPage implements OnInit {
-  public item: Recipe;
-
+export class RecipeDetailPage implements OnInit, OnDestroy {
+  public recipe: Recipe;
+  private recipeSub: Subscription;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private navController: NavController,
-    private placesService: RecipesService,
+    private recipesService: RecipesService,
     public modalCtrl: ModalController,
     private actionSheetController: ActionSheetController
   ) {}
+  ngOnDestroy(): void {
+    if (this.recipeSub) {
+      this.recipeSub.unsubscribe();
+    }
+  }
 
   ngOnInit() {
     this.route.paramMap.subscribe((paramMap) => {
@@ -32,7 +38,11 @@ export class PlaceDetailPage implements OnInit {
         this.navController.navigateBack('main/tabs/explore');
         return;
       }
-      this.item = this.placesService.loadItem(paramMap.get('id'));
+      this.recipeSub = this.recipesService
+        .loadItem(paramMap.get('id'))
+        .subscribe((recipe) => {
+          this.recipe = recipe;
+        });
     });
   }
   public async onClick() {
@@ -78,7 +88,7 @@ export class PlaceDetailPage implements OnInit {
     console.log('Mode', mode);
     const bookingModal = await this.modalCtrl.create({
       component: CreateBookingComponent,
-      componentProps: { selectedPlace: this.item },
+      componentProps: { selectedPlace: this.recipe },
     });
 
     await bookingModal.present();
