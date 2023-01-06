@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { ActivatedRoute, Route, Router } from '@angular/router';
+import { LoadingController, NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { Recipe } from '../../recipe.model';
 import { RecipesService } from '../../recipes.service';
@@ -18,7 +18,9 @@ export class EditOfferPage implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private navController: NavController,
-    private placesService: RecipesService
+    private recipesService: RecipesService,
+    private loadingController: LoadingController,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -27,7 +29,7 @@ export class EditOfferPage implements OnInit, OnDestroy {
         this.navController.navigateBack('main/tabs/offers');
         return;
       }
-      this.recipeSub = this.placesService
+      this.recipeSub = this.recipesService
       .loadItem(paramMap.get('id'))
       .subscribe((recipe) => {
         this.recipe = recipe;
@@ -50,10 +52,25 @@ export class EditOfferPage implements OnInit, OnDestroy {
       this.recipeSub.unsubscribe();
     }
   }
-  public editOffer(): void {
+  public onUpdate() {
     if (!this.form.valid) {
       return;
     }
+    this.loadingController.create({
+    message: 'Adding some spices'
+    }).then(loadingEl => {
+    loadingEl.present();
+    this.recipesService
+      .updateItem(
+        this.recipe.id,
+        this.form.value.title,
+        this.form.value.description
+      ).subscribe(() => {
+        loadingEl.dismiss();
+        this.form.reset();
+        this.router.navigate(['/main/tabs/offers']);
+      });
+    });
     console.log('Add logic to save editing');
   }
 }
