@@ -47,14 +47,14 @@ export class RecipesService {
     return this.recipesList.asObservable();
   }
 
-  loadItem(id: string) {
+  public loadItem(id: string) {
     return this.recipes.pipe(
       take(1),
       map((recipes) => ({ ...recipes.find((item) => item.id === id) }))
     );
   }
 
-  addItem(
+  public addItem(
     title: string,
     description: string,
     price: number,
@@ -77,5 +77,25 @@ export class RecipesService {
           this.recipesList.next(recipes.concat(newItem));
       })
     );
+  }
+
+  public updateItem(recipeId: string, title: string, description: string) {
+   return this.recipes.pipe(take(1), delay(1000), tap(recipes => {
+      const updateRecipeIndex = recipes.findIndex(re => re.id === recipeId);
+      const updatedRecipes = [...recipes];
+      const oldRecipe = updatedRecipes[updateRecipeIndex];
+      updatedRecipes[updateRecipeIndex] = new Recipe (
+        oldRecipe.id,
+        title,
+        description,
+        oldRecipe.imageUrl,
+        oldRecipe.price,
+        oldRecipe.availableFrom,
+        oldRecipe.availableTo,
+        oldRecipe.userId
+        )
+        ;
+        this.recipesList.next(updatedRecipes);
+    }));
   }
 }
